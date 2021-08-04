@@ -14,25 +14,25 @@ export class AuthService extends ApiService {
     super();
   }
 
-  
+
 
   getUserInfo(token: string) {
-    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + environment.apiKey
+    const url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=' + environment.apiKey;
 
     return this.http.post(url, {idToken: token}, this.getHttpOptions());
   }
 
   login(email: string, password: string) {
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.apiKey;
-    
-    return this.http.post(url, {email: email, password, returnSecureToken: true}, 
+
+    return this.http.post(url, {email, password, returnSecureToken: true},
       this.getHttpOptions());
   }
 
   signup(username: string, password: string) {
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.apiKey;
-    
-    return this.http.post(url, {email: username, password, returnSecureToken: true}, 
+    console.log(url);
+    return this.http.post(url, {email: username, password, returnSecureToken: true},
       this.getHttpOptions());
   }
 

@@ -15,18 +15,22 @@ export class PostsService extends ApiService {
   }
 
   savePost(post: Post) {
-    const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    console.log('saving to firebase');
+    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts.json';
 
     return this.http.post(url, post, this.getHttpOptions());
-    // "https://<DATABASE_NAME>.firebaseio.com/users/ada/name.json?auth=<ID_TOKEN>"
   }
 
 
   readPosts() {
-    const token = this.ngRedux.getState().users.token;
-    const url = 'https://kvalifik-1ac56-default-rtdb.firebaseio.com/posts.json?auth=' + token;
+    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts.json';
 
     return this.http.get(url, this.getHttpOptions());
+  }
+
+  updatePost(post: Post){
+    console.log('trying to send to firebase');
+    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts.json';
+    return this.http.put(url, post, this.getHttpOptions());
   }
 }

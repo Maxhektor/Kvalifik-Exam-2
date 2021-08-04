@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserState } from './store/Store';
 
 @Component({
   selector: 'app-root',

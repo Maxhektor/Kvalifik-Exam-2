@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
   // DI - Dependency injection
-  constructor(private fb: FormBuilder, private router: Router, 
-    private userActions: UserActions) {
+  constructor(private fb: FormBuilder, private router: Router,
+              private userActions: UserActions) {
   }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(3)]], // multiple validators
         password: ['', Validators.required] // Single validator
       }
-    )
+    );
   }
 
 
@@ -31,10 +31,11 @@ export class LoginComponent implements OnInit {
     console.log(this.loginForm);
 
     if (this.loginForm.valid) {
-      
+
       // Send the data to the server to verify the user login
       // navigate after successful login.
       this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
+      this.router.navigate(['posts']);
 
 
     }

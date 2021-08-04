@@ -10,7 +10,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import {MatListModule, MatSelectionList} from '@angular/material/list';
 import { AppRoutingModule } from './app-routing.module';
 import { PostsComponent } from './posts/posts.component';
-import { EventsComponent } from './events/events.component';
+import { EventComponent } from './event/event.component';
 import { ChatsComponent } from './chats/chats.component';
 import { NeweditpostComponent } from './neweditpost/neweditpost.component';
 import {MatInputModule} from '@angular/material/input';
@@ -33,7 +33,7 @@ import { PostsPipe } from './posts.pipe';
     AppComponent,
     SidenavComponent,
     PostsComponent,
-    EventsComponent,
+    EventComponent,
     ChatsComponent,
     NeweditpostComponent,
     PostComponent,
@@ -57,13 +57,13 @@ import { PostsPipe } from './posts.pipe';
 })
 export class AppModule {
   constructor(private ngRedux: NgRedux<AppState>,
-    private devTool: DevToolsExtension,
-    private ngReduxRouter: NgReduxRouter,) {
-   
-    this.ngRedux.configureStore(rootReducer, {}, [],[ devTool.isEnabled() ? devTool.enhancer() : f => f]);
+              private devTool: DevToolsExtension,
+              private ngReduxRouter: NgReduxRouter, ) {
+
+    this.ngRedux.configureStore(rootReducer, {}, [], [ devTool.isEnabled() ? devTool.enhancer() : f => f]);
 //    this.ngRedux.configureStore(rootReducer, {});
- 
-      ngReduxRouter.initialize(/* args */);   
+
+    ngReduxRouter.initialize(/* args */);
   }
- 
+
  }

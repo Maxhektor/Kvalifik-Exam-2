@@ -1,5 +1,5 @@
-import { Collection } from "./Collection";
-import { User } from "./User";
+import { Collection } from './Collection';
+import { User } from './User';
 
 export class Post {
     id;
@@ -9,10 +9,7 @@ export class Post {
     media?: string;
     collections: Collection[];
     comments: Comment[];
-    // constructor() {
-    //     this.title = '';
-    //     this.text = '';
-    // }
+
 }
 
 export class Comment {
@@ -25,5 +22,4 @@ export class Comment {
 export class UserVm {
     firstName: string;
     lastName: string;
-    profileImage?: string;
 }

@@ -12,8 +12,8 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   // DI - Dependency injection
-  constructor(private fb: FormBuilder, private router: Router, 
-    private userActions: UserActions) {
+  constructor(private fb: FormBuilder, private router: Router,
+              private userActions: UserActions) {
   }
 
   ngOnInit() {
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
         username: ['', [Validators.required, Validators.minLength(3)]], // multiple validators
         password: ['', Validators.required] // Single validator
       }
-    )
+    );
   }
 
   saveSomething() {
@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
 
     if (this.registerForm.valid) {
       this.userActions.signup(this.registerForm.value.username, this.registerForm.value.password);
-      
+
       // Send the data to the server to verify the user login
       // navigate after successful login.
 

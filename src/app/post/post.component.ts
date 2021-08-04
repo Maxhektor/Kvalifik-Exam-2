@@ -15,8 +15,13 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  
+
   editPost(id: string): void {
     this.postClicked.emit(id);
   }
+
+  deletePost(id: string): void {
+    this.postClicked.emit(id);
+  }
+
 }

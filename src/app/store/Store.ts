@@ -6,7 +6,6 @@ import { postsReducer } from './reducers/PostReducer';
 import { usersReducer } from './reducers/UserReducer';
 
 export class PostState {
-    isHappy: boolean;
     posts: Post[];
 }
 
@@ -15,18 +14,18 @@ export class UserState {
     token: string;
 }
 // export class EventState {
-//     events: Event[];
+//     event: Event[];
 // }
 
 export class AppState {
     posts?: PostState;
     users?: UserState;
-    // events?: EventState;
+    // event?: EventState;
 }
 export const rootReducer = combineReducers<AppState>({
     posts: postsReducer,
     users: usersReducer
-    // events: eventsReducer,
+    // event: eventsReducer,
 
     // router: routerReducer
 });

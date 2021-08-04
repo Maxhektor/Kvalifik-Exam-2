@@ -7,25 +7,24 @@ import { PostsService } from 'src/app/posts.service';
 @Injectable({ providedIn: 'root'})
 export class PostActions {
 
-    constructor (private ngRedux: NgRedux<AppState>, private postService: PostsService)
-    {}
+  constructor(private ngRedux: NgRedux<AppState>, private postService: PostsService)
+  {}
 
-  static SET_HAPPY: string = 'SET_HAPPY';
-  static ADD_POST: string = 'ADD_POST';
-  static UPDATE_POST: string = 'UPDATE_POST';
-  static READ_POSTS: string = 'READ_POSTS';
+  static ADD_POST = 'ADD_POST';
+  static UPDATE_POST = 'UPDATE_POST';
+  static READ_POSTS = 'READ_POSTS';
 
 
   readPosts() {
     this.postService.readPosts().subscribe((result: any) => {
-      console.log("result from server");
+      console.log('posts fetched from server:');
       console.log(result);
 
-      let posts: Post[] = [];
-      for(let id in result) {
-        let postObj = result[id];
+      const posts: Post[] = [];
+      for(const id in result) {
+        const postObj = result[id];
         postObj.id = id;
-        
+
         posts.push(postObj as Post);
       }
 
@@ -37,18 +36,11 @@ export class PostActions {
   }
 
 
-  setType(isHappy: boolean): void {
 
-    this.ngRedux.dispatch({
-        type: PostActions.SET_HAPPY,
-        payload: isHappy
-    });
-  }
-
-  addPost(newPost: Post) : void {
+  addPost(newPost: Post): void {
 
     this.postService.savePost(newPost).subscribe((result: any) => {
-      console.log("result from saving");
+      console.log('result from saving');
       console.log(result);
 
       newPost.id = result.name;
@@ -61,7 +53,10 @@ export class PostActions {
 
 
   }
-  updatePost(updatedPost: Post) : void {
+
+  updatePost(updatedPost: Post): void {
+    console.log('2 passed to Post Actions: ');
+    console.log(updatedPost);
     this.ngRedux.dispatch({
         type: PostActions.UPDATE_POST,
         payload: updatedPost
