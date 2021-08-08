@@ -1,15 +1,35 @@
 <h3>{{headerTitle}}</h3>
+<br>
 
 <form [formGroup]="postForm" (ngSubmit)="onSubmitPost()">
-  <mat-form-field class="example-full-width">
+
+  <mat-form-field style="width: 18em" class="example-full-width">
     <mat-label>Title</mat-label>
-    <input matInput id="titleInput" placeholder="Title" formControlName="title">
+    <textarea matInput id="titleInput" placeholder="Title" formControlName="title"></textarea>
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
+  <mat-form-field style="width: 30em" class="example-full-width">
     <mat-label>Text</mat-label>
     <textarea matInput id="textInput" placeholder="Write your post" formControlName="text"></textarea>
   </mat-form-field>
+  <br>
+  <div style="display: flex">
+    <div style="padding: 10px">
+      <button mat-raised-button id="savePost" color="primary" (click)="loadingSave()">Save</button>
+    </div>
+    <div style="padding: 50px">
+      <mat-spinner *ngIf="showLoadSpinner"></mat-spinner>
+    </div>
+    <div style="padding: 10px">
+      <button mat-raised-button id="cancelPost" style="color: orange" (click)="cancelPost()">Cancel</button>
+    </div>
 
-  <button mat-raised-button id="savePost" color="primary">Save</button>
+  </div>
 </form>
+
+<div *ngIf="isInEditMode()" style="padding: 10px">
+  <button mat-raised-button id="deletePost" color="warn" (click)="deletePost()" (click)="loadingDelete()">Delete</button>
+  <div style="padding: 50px">
+    <mat-spinner *ngIf="showDeleteSpinner"></mat-spinner>
+  </div>
+</div>

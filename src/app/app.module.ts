@@ -27,6 +27,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { RegisterComponent } from './register/register.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PostsPipe } from './posts.pipe';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -41,17 +42,17 @@ import { PostsPipe } from './posts.pipe';
     RegisterComponent,
     PostsPipe
   ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    NgReduxModule,
-    NgReduxRouterModule.forRoot(),
-    BrowserAnimationsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
-    MatInputModule, MatCardModule, MatGridListModule, MatListModule
-  ],
+    imports: [
+        BrowserModule,
+        FormsModule,
+        NgReduxModule,
+        NgReduxRouterModule.forRoot(),
+        BrowserAnimationsModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        MatButtonModule, MatToolbarModule, MatIconModule, MatListModule, AppRoutingModule,
+        MatInputModule, MatCardModule, MatGridListModule, MatListModule, MatProgressSpinnerModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

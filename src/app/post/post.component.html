@@ -1,19 +1,16 @@
-<mat-card-header>
-    <div mat-card-avatar class="example-header-image"></div>
+<mat-card-header style="display: flex; justify-content: center; text-align: center">
     <mat-card-title>{{post.title}}</mat-card-title>
     <mat-card-subtitle>{{post.createdDate | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+</mat-card-header>
   <mat-card-content>
     <p>
       {{post.text}}
     </p>
   </mat-card-content>
   <mat-card-actions>
-      <button mat-stroked-button color="primary"
-        (click)="editPost(post.id)" class="e2e-edit">Edit</button>
-      <button mat-stroked-button color="primary"
-              (click)="deletePost(post.id)" class="e2e-edit">Delete</button>
+      <button *ngIf="auth.isLoggedIn()" mat-stroked-button color="primary"
+        (click)="editPost(post.id)" class="e2e-edit">View/Edit</button>
   </mat-card-actions>
 
 
+<!-- TODO: 'forbedre udseende på cards. Inkl. at text løber over -->

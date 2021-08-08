@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Post } from '../entities/Post';
 import { PostActions } from '../store/actions/PostActions';
 import { AppState } from '../store/Store';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-posts',
@@ -15,7 +16,9 @@ export class PostsComponent implements OnInit {
   public search = '';
 
   constructor(private router: Router,
-              private ngRedux: NgRedux<AppState>, private postActions: PostActions) { }
+              private ngRedux: NgRedux<AppState>,
+              private postActions: PostActions,
+              public auth: AuthService) { }
 
   ngOnInit(): void {
     this.postActions.readPosts();

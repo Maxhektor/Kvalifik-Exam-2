@@ -2,22 +2,32 @@
  <span>CBS Students (Kvalifik)</span>
  <span class="example-spacer"></span>
   <div style="padding-right: 2em">
-  <mat-icon-button routerLink="signup" routerLinkActive="active" style="cursor: pointer">
+  <mat-icon-button *ngIf="!auth.isLoggedIn()" routerLink="signup" routerLinkActive="active" style="cursor: pointer">
     <div>
       <mat-icon aria-hidden="false" aria-label="Example home icon">supervised_user_circle</mat-icon>
       Signup
     </div>
   </mat-icon-button>
   </div>
-
-
-
-  <mat-mini-fab routerLink="login" routerLinkActive="active" style="cursor: pointer">
+  <mat-mini-fab *ngIf="!auth.isLoggedIn()" routerLink="login" routerLinkActive="active" style="cursor: pointer">
     <div>
       <mat-icon aria-hidden="false" aria-label="Example home icon">login</mat-icon>
       Login
     </div>
   </mat-mini-fab>
+
+
+  <mat-icon-button *ngIf="auth.isLoggedIn()" (click)="auth.logout()" style="cursor: pointer">
+    <div>
+      <mat-icon>logout</mat-icon>
+      Logout
+    </div>
+  </mat-icon-button>
+
+
+
+
+
 </mat-toolbar>
 
 
@@ -26,7 +36,7 @@
     <!-- Sidenav -->
     <app-sidenav></app-sidenav>
   </div>
-  <div class="content">
+  <div class="content" style="min-height: 90vh">
     <!-- Content -->
     <router-outlet></router-outlet>
   </div>

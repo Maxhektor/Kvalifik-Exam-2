@@ -12,32 +12,23 @@ export class UserActions {
 
   static SIGNED_UP = 'SIGNED_UP';
   static LOGGED_IN = 'LOGGED_IN';
-  static SAVE_SOMETHING = 'SAVE_SOMETHING';
 
-  // saveSomething(something: string) {
-  //   this.authService.saveSomething(something).subscribe((res: any) => {
-  //     console.log(res);
-  //   });
-  // }
 
   login(username: string, password: string): void {
-      this.authService.login(username, password).subscribe((result: any) => {
-        console.log('response from server');
-        console.log(result);
 
+    this.authService.login(username, password).subscribe((result: any) => {
         const user: User = {
           id: result.localId,
           username, email: username,
           signupDate: undefined
         } as User;
 
+
         this.authService.getUserInfo(result.idToken).subscribe((response: any) => {
           console.log('getUserInfo');
           console.log(response);
           sessionStorage.setItem('loggedUser', username);
-
           user.signupDate = new Date(Number(response.users[0].createdAt));
-
           this.ngRedux.dispatch({
             type: UserActions.LOGGED_IN,
             payload: {user, token: result.idToken}
@@ -48,10 +39,8 @@ export class UserActions {
 
   signup(username: string, password: string): void {
     this.authService.signup(username, password).subscribe((res: any) => {
-        // After you get a reponse from the server
         console.log('3 after getting a reponse');
         console.log(res);
-
         const user: User = {
           id: res.localId,
           username, email: username,
@@ -63,13 +52,7 @@ export class UserActions {
           payload: {user, token: res.idToken}
       });
     });
-
     console.log('before getting a reponse');
-
-    // Before you get a response from the server.
-
-
-
   }
 
 }

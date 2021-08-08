@@ -1,6 +1,7 @@
 import { EventEmitter, Output } from '@angular/core';
 import { Component, Input, OnInit } from '@angular/core';
 import { Post } from '../entities/Post';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-post',
@@ -11,7 +12,7 @@ export class PostComponent implements OnInit {
  @Input() post: Post;
  @Output() postClicked: EventEmitter<any> = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -19,9 +20,4 @@ export class PostComponent implements OnInit {
   editPost(id: string): void {
     this.postClicked.emit(id);
   }
-
-  deletePost(id: string): void {
-    this.postClicked.emit(id);
-  }
-
 }

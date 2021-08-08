@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { ApiService } from './api.service';
 import { Post } from './entities/Post';
 import { AppState } from './store/Store';
+import {timeout} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -24,13 +25,19 @@ export class PostsService extends ApiService {
 
   readPosts() {
     const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts.json';
-
     return this.http.get(url, this.getHttpOptions());
   }
 
+
   updatePost(post: Post){
     console.log('trying to send to firebase');
-    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts.json';
+    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts/' + post.id + '.json';
     return this.http.put(url, post, this.getHttpOptions());
+  }
+
+  deletePost(post: Post){
+    console.log('deleting post');
+    const url = 'https://kvalifik-exam-project-default-rtdb.firebaseio.com/posts/' + post.id + '.json';
+    return this.http.delete(url, this.getHttpOptions());
   }
 }

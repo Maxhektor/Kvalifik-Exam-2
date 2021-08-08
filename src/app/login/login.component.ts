@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserActions } from '../store/actions/UserActions';
+import { AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-login', // name of component
@@ -13,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   // DI - Dependency injection
   constructor(private fb: FormBuilder, private router: Router,
-              private userActions: UserActions) {
+              private userActions: UserActions, public authService: AuthService) {
   }
 
   ngOnInit() {
@@ -29,15 +30,17 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.loginForm);
-
     if (this.loginForm.valid) {
 
-      // Send the data to the server to verify the user login
-      // navigate after successful login.
+      //TODO: fix nødvendigheden af dobbeltclick på login knappen for a blive navigeret
       this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
-      this.router.navigate(['posts']);
+      if (this.authService.isLoggedIn() === true){
+        console.log('checkpoint1');
+        this.router.navigate(['posts']);
+      }
 
-
+    } else if (!this.loginForm.valid) {
+      console.log('checkpoint 2');
     }
 
   }

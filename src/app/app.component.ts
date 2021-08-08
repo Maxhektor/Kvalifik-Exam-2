@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserState } from './store/Store';
+import {AuthService} from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,6 @@ import { UserState } from './store/Store';
 })
 export class AppComponent {
   title = 'kvalifik';
+  constructor(public auth: AuthService) {
+  }
 }

@@ -25,22 +25,16 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  saveSomething() {
-    // this.userActions.saveSomething('interesting');
-  }
 
 
   onSubmit(): void {
     console.log(this.registerForm);
-
+    //TODO: fix at hvis formen ikke bliver accepteret skal man ikke navigeres til login, men blive på signup med advarsel
     if (this.registerForm.valid) {
       this.userActions.signup(this.registerForm.value.username, this.registerForm.value.password);
-
-      // Send the data to the server to verify the user login
-      // navigate after successful login.
-
-
-
+      this.router.navigate(['login']);
+    } else if (!this.registerForm.valid){
+      console.log('something went wrong');
     }
 
   }

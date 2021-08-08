@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../entities/Post';
 import { PostActions } from '../store/actions/PostActions';
 import { AppState } from '../store/Store';
+import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-neweditpost',
@@ -16,7 +17,8 @@ export class NeweditpostComponent implements OnInit {
   public postForm: FormGroup;
   public headerTitle: String = 'Create New Post';
   public editMode = false;
-
+  public showDeleteSpinner = false;
+  public showLoadSpinner = false;
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
@@ -45,33 +47,52 @@ export class NeweditpostComponent implements OnInit {
       text: [this.selectedPost.text, Validators.required],
     });
   }
-
+  //TODO: 'Sæt maximum længde på titel, 25char?
+  //TODO: 'Fix overflow af text i cards
   onSubmitPost() {
-
     if (this.postForm.valid){
 
       if (!this.editMode) {
         this.selectedPost = this.postForm.value;
         this.selectedPost.createdDate = new Date();
-
-
         this.postActions.addPost(this.selectedPost);
       } else {
-        // console.log("call update");
-        // console.log(this.selectedPost);
-        // console.log(this.postForm.value);
-
         this.selectedPost.title = this.postForm.value.title;
         this.selectedPost.text = this.postForm.value.text;
-        console.log('1 tries to update post in neweditpost.component');
-
         this.postActions.updatePost(this.selectedPost);
+        console.log(this.selectedPost);
       }
-      // this.tempDataService.addPost(this.selectedPost);
     }
+    setTimeout(() => {
+      this.router.navigate(['posts']);
+    }, 1000);
+  }
+
+  deletePost(){
+    this.postActions.deletePost(this.selectedPost);
+    setTimeout(() => {
+      this.router.navigate(['posts']);
+    }, 1000);
+  }
+
+  cancelPost(){
     this.router.navigate(['posts']);
   }
 
+  isInEditMode(){
+    return this.editMode;
+  }
 
-
+  loadingDelete(){
+    this.showDeleteSpinner = true;
+    setTimeout(() => {
+      this.showDeleteSpinner = false;
+    }, 1000);
+  }
+  loadingSave(){
+    this.showLoadSpinner = true;
+    setTimeout(() => {
+      this.showLoadSpinner = false;
+    }, 1000);
+  }
 }
