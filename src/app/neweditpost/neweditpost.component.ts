@@ -14,7 +14,7 @@ import { AppState } from '../store/Store';
 export class NeweditpostComponent implements OnInit {
   public selectedPost: Post;
   public postForm: FormGroup;
-  public headerTitle: String = 'Create New Post';
+  public headerTitle = 'Create New Post';
   public editMode = false;
   public showDeleteSpinner = false;
   public showLoadSpinner = false;
