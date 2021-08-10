@@ -14,9 +14,10 @@ exports.config = {
   ],
   multiCapabilities: [
     {'browserName': 'chrome'},
-    {'browserName': 'firefox'},
+    //{'browserName': 'firefox'},
   ],
-  directConnect: true,
+  //directConnect: true,
+  seleniumAddress: 'http://localhost:4444/wd/hub',
   SELENIUM_PROMISE_MANAGER: false,
   baseUrl: 'http://localhost:4200/',
   framework: 'jasmine',

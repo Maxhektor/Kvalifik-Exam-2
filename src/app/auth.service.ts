@@ -1,5 +1,5 @@
 import { NgRedux } from '@angular-redux/store';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ApiService } from './api.service';
@@ -7,7 +7,7 @@ import { AppState } from './store/Store';
 import {Router} from '@angular/router';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
-import {getErrorMessage} from 'codelyzer/templateAccessibilityElementsContentRule';
+
 
 export interface AuthResponseData {
   kind: string;
@@ -39,10 +39,13 @@ export class AuthService extends ApiService {
 
    login(email: string, password: string): Observable<any>{
      const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + environment.apiKey;
-     this.http.post(url, {email, password, returnSecureToken: true}, this.getHttpOptions()).pipe(catchError(this.handleError)).subscribe(user => {
+     this.http.post(url, {email, password, returnSecureToken: true},
+       this.getHttpOptions()).pipe(catchError(this.handleError))
+       .subscribe(user => {
        if (user) {
          this.hasError = null;
          this.loggedIn = true;
+         this.router.navigate(['posts']);
        }
      }, error => {
        this.hasError = error;
@@ -54,9 +57,20 @@ export class AuthService extends ApiService {
    }
 
 
-  signup(username: string, password: string) {
+  signup(username: string, password: string): Observable<any> {
     const url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.apiKey;
-    return this.http.post<AuthResponseData>(url, {email: username, password, returnSecureToken: true},
+
+    this.http.post(url, {email: username, password, returnSecureToken: true},
+      this.getHttpOptions()).pipe(catchError(this.handleError)).subscribe( user => {
+        if (user){
+          this.hasError = null;
+        }
+    }, error => {
+        this.hasError = error;
+        this.router.navigate(['signup']);
+        console.log(error);
+    });
+    return this.http.post<any>(url, {email: username, password, returnSecureToken: true},
       this.getHttpOptions()).pipe(catchError(this.handleError));
   }
 
@@ -87,6 +101,7 @@ export class AuthService extends ApiService {
       case 'EMAIL_NOT_FOUND':
         errorMessage = 'Can\'t find account with this email / password combination';
         this.hasError = errorMessage;
+
         break;
       case 'INVALID_PASSWORD':
         errorMessage = 'Can\'t find account with this email / password combination';
@@ -96,5 +111,11 @@ export class AuthService extends ApiService {
     this.hasError = errorMessage;
     return throwError(errorMessage);
   }
-
+  public setIsLoggedIn(givenBoolean: boolean): void {
+    if (givenBoolean === true){
+      this.loggedIn = true;
+    } else {
+      this.loggedIn = false;
+    }
+  }
 }

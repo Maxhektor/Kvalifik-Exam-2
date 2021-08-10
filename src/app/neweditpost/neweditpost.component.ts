@@ -5,7 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from '../entities/Post';
 import { PostActions } from '../store/actions/PostActions';
 import { AppState } from '../store/Store';
-import {timeout} from 'rxjs/operators';
 
 @Component({
   selector: 'app-neweditpost',
@@ -47,8 +46,6 @@ export class NeweditpostComponent implements OnInit {
       text: [this.selectedPost.text, Validators.required],
     });
   }
-  //TODO: 'Sæt maximum længde på titel, 25char?
-  //TODO: 'Fix overflow af text i cards
   onSubmitPost() {
     if (this.postForm.valid){
 

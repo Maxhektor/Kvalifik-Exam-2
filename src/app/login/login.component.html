@@ -14,13 +14,13 @@
 
           <div>
             <mat-form-field>
-              <input matInput placeholder="Username" formControlName="username">
+              <input matInput placeholder="Email" formControlName="username">
 
               <mat-error *ngIf="loginForm.controls.username.errors?.required && loginForm.controls.username.touched">
-                You must fill out the username
+                You must fill out the email
               </mat-error>
               <mat-error *ngIf="loginForm.controls.username.errors?.minlength && loginForm.controls.username.touched">
-                Username must be at least 3 characters
+                Email must be at least 3 characters
               </mat-error>
             </mat-form-field>
           </div>

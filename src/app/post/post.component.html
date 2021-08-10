@@ -1,10 +1,10 @@
 <mat-card-header style="display: flex; justify-content: center; text-align: center">
-    <mat-card-title>{{post.title}}</mat-card-title>
+    <mat-card-title>{{post.title | slice:0:25}}</mat-card-title>
     <mat-card-subtitle>{{post.createdDate | date: 'dd/MM/yyyy'}}</mat-card-subtitle>
 </mat-card-header>
   <mat-card-content>
     <p>
-      {{post.text}}
+      {{post.text | slice:0:38}}
     </p>
   </mat-card-content>
   <mat-card-actions>
@@ -13,4 +13,3 @@
   </mat-card-actions>
 
 
-<!-- TODO: 'forbedre udseende på cards. Inkl. at text løber over -->

@@ -52,7 +52,6 @@ export class UserActions {
           payload: {user, token: res.idToken}
       });
     });
-    console.log('before getting a reponse');
   }
 
 }

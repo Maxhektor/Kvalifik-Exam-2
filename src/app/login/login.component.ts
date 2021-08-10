@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.hasError = null;
     this.loginForm = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(3)]], // multiple validators
@@ -27,21 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
 
-
-  onSubmit(): void {
-    console.log(this.loginForm);
-    if (this.loginForm.valid) {
-
-      //TODO: fix nødvendigheden af dobbeltclick på login knappen for a blive navigeret
-      this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
-      if (this.authService.isLoggedIn() === true){
-        console.log('checkpoint1');
-        this.router.navigate(['posts']);
-      }
-
-    } else if (!this.loginForm.valid) {
-      console.log('checkpoint 2');
-    }
-
+  onSubmit() {
+    this.userActions.login(this.loginForm.value.username, this.loginForm.value.password);
   }
 }
